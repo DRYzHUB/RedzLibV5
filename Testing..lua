@@ -392,6 +392,7 @@ AddEle("Button", function(parent, props, ...)
 	local New = InsertTheme(SetProps(Create("TextButton", parent, {
 		Text = "",
 		Size = UDim2.fromScale(1, 1),
+		BackgroundColor3 = Theme["Color Hub 2"],
 		AutoButtonColor = false
 	}), props), "Frame")
 
@@ -997,7 +998,6 @@ end
 		end
 		
 		local TabSelect = Make("Button", MainScroll, {
-	    	BackgroundColor3 = Theme["Color Hub 2"],
 			Size = UDim2.new(1, 0, 0, 24)
 		})Make("Corner", TabSelect)
 		
