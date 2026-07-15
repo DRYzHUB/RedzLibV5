@@ -43,7 +43,7 @@ local redzlib = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "Darker"
+		Theme = "Purple"
 	},
 	Settings = {},
 	Connection = {},
@@ -1118,7 +1118,7 @@ end
 				Position = UDim2.new(0, 30),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
-				TextSize = 14,
+				TextSize = 18,
 				TextXAlignment = "Left"
 			}), "Text")
 			
@@ -1320,7 +1320,7 @@ end
 			
 			local DropFrame = Create("Frame", NoClickFrame, {
 				Size = UDim2.new(SelectedFrame.Size.X, 0, 0),
-				BackgroundTransparency = 0.1,
+				BackgroundTransparency = 1,
 				BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 				AnchorPoint = Vector2.new(0, 1),
 				Name = "DropdownFrame",
