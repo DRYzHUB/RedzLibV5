@@ -464,6 +464,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 	}), "DarkText")
 
 	local Frame = Make("Button", Instance, {
+		BackgroundColor3 = Theme["Color Theme"],
 		Size = UDim2.new(1, 0, 0, 25),
 		AutomaticSize = "Y",
 		Name = "Option"
@@ -1118,7 +1119,7 @@ end
 				Position = UDim2.new(0, 30),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
-				TextSize = 18,
+				TextSize = 24,
 				TextXAlignment = "Left"
 			}), "Text")
 			
