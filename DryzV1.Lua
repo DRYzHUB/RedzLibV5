@@ -1214,7 +1214,6 @@ AddEle("Button", function(parent, props, ...)
 	local New = InsertTheme(SetProps(Create("TextButton", parent, {
 		Text = "",
 		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = Theme["Color Hub 2"],
 		AutoButtonColor = false
 	}), props), "Frame")
 
@@ -1441,8 +1440,8 @@ function redzlib:MakeWindow(Configs)
         Size = UDim2.new(1, 0, 1, 0),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1,
-        Image = "rbxassetid://133021256665611", 
-        ImageTransparency = 0.03,
+        Image = "rbxassetid://138706240396567", 
+        ImageTransparency = 0.15,
         ScaleType = Enum.ScaleType.Crop,
         ZIndex = 0
     })
@@ -1527,142 +1526,6 @@ function redzlib:MakeWindow(Configs)
 		ClipsDescendants = true,
 		Name = "Containers"
 	})
-
-	local ParticleContainer = Create("Frame", Containers, {
-		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundTransparency = 1,
-		Name = "ThemeParticles",
-		ZIndex = -5,
-		ClipsDescendants = true
-	})
-
-	local ParticleConfig = {
-		MaxParticles = 15,
-		SpawnRate = 0.2,
-		ParticleSize = {Min = 7, Max = 12},
-		ParticleSpeed = {Min = 12, Max = 25},
-		ParticleLifetime = 5
-	}
-
-	local ActiveParticles = {}
-	local LastSpawn = 0
-
-	local function CreateParticle()
-		if #ActiveParticles >= ParticleConfig.MaxParticles then return end
-		
-		local containerSize = ParticleContainer.AbsoluteSize
-		local startX = math.random(10, containerSize.X - 10)
-		local startY = containerSize.Y + 20
-		
-		local size = math.random(ParticleConfig.ParticleSize.Min, ParticleConfig.ParticleSize.Max)
-		local speed = math.random(ParticleConfig.ParticleSpeed.Min, ParticleConfig.ParticleSpeed.Max)
-		
-		local particleColor = Theme["Color Theme"]
-		
-		local Particle = Create("Frame", ParticleContainer, {
-			Size = UDim2.fromOffset(size, size),
-			Position = UDim2.fromOffset(startX, startY),
-			BackgroundColor3 = particleColor,
-			BackgroundTransparency = 0.5,
-			BorderSizePixel = 0
-		})
-		
-		Create("UICorner", Particle, {
-			CornerRadius = UDim.new(0.5, 0)
-		})
-		
-		local Glow = Create("Frame", Particle, {
-			Size = UDim2.new(1, 4, 1, 4),
-			Position = UDim2.new(0.5, 0, 0.5, 0),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = particleColor,
-			BackgroundTransparency = 0.2,
-			ZIndex = -1
-		})
-		Create("UICorner", Glow, {
-			CornerRadius = UDim.new(0.5, 0)
-		})
-		
-		local ParticleData = {
-			Frame = Particle,
-			Glow = Glow,
-			StartTime = tick(),
-			Speed = speed,
-			Direction = Vector2.new(math.random(-8, 8), -speed),
-			FloatOffset = math.random(0, 360),
-			OriginalColor = particleColor
-		}
-		
-		Particle.BackgroundTransparency = 0.1
-		Glow.BackgroundTransparency = 0.2
-		CreateTween({Particle, "BackgroundTransparency", 0.88, 1.5})
-		
-		table.insert(ActiveParticles, ParticleData)
-	end
-
-	local function UpdateParticles()
-		local containerSize = ParticleContainer.AbsoluteSize
-		
-		for i = #ActiveParticles, 1, -1 do
-			local particle = ActiveParticles[i]
-			local elapsed = tick() - particle.StartTime
-			
-			if elapsed >= ParticleConfig.ParticleLifetime or 
-			   particle.Frame.Position.Y.Offset < -20 or
-			   particle.Frame.Position.X.Offset < -20 or
-			   particle.Frame.Position.X.Offset > containerSize.X + 20 then
-			   
-				CreateTween({particle.Frame, "BackgroundTransparency", 1, 0.8})
-				CreateTween({particle.Glow, "BackgroundTransparency", 1, 0.8})
-				
-				task.spawn(function()
-					task.wait(0.8)
-					if particle.Frame and particle.Frame.Parent then
-						particle.Frame:Destroy()
-					end
-				end)
-				
-				table.remove(ActiveParticles, i)
-			else
-				local currentPos = particle.Frame.Position
-				local newX = currentPos.X.Offset + particle.Direction.X * 0.016
-				local newY = currentPos.Y.Offset + particle.Direction.Y * 0.016
-				local floatX = math.sin((elapsed * 1.2 + particle.FloatOffset) * 0.6) * 8
-				newX = newX + floatX * 0.016
-				
-				particle.Frame.Position = UDim2.fromOffset(newX, newY)
-
-				local lifeRatio = elapsed / ParticleConfig.ParticleLifetime
-				if lifeRatio > 0.75 then
-					local fadeAlpha = 0.88 * (1 - ((lifeRatio - 0.75) / 0.25))
-					particle.Frame.BackgroundTransparency = math.min(fadeAlpha + 0.88, 0.98)
-				end
-			end
-		end
-	end
-
-	local function SpawnSystem()
-		if tick() - LastSpawn >= ParticleConfig.SpawnRate and MainFrame.Visible then
-			CreateParticle()
-			LastSpawn = tick()
-		end
-	end
-
-	local ParticleConnection = RunService.Heartbeat:Connect(function()
-		UpdateParticles()
-		SpawnSystem()
-	end)
-
-	Connection.ThemeChanged:Connect(function(newTheme)
-		local newColor = redzlib.Themes[newTheme]["Color Theme"]
-		
-		for _, particle in pairs(ActiveParticles) do
-			if particle.Frame and particle.Frame.Parent then
-				CreateTween({particle.Frame, "BackgroundColor3", newColor, 0.5})
-				CreateTween({particle.Glow, "BackgroundColor3", newColor, 0.5})
-			end
-		end
-	end)
 	
 	local ControlSize1, ControlSize2 = MakeDrag(Create("ImageButton", MainFrame, {
 		Size = UDim2.new(0, 35, 0, 35),
@@ -1734,13 +1597,13 @@ function redzlib:MakeWindow(Configs)
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
-			Title = "Close",
-			Text = "Deseja realmente fechar o Drip Client? Ele contém recursos essenciais e fechar agora pode interromper funções importantes, causar falhas ou perder suas configurações. Cuidado antes de prosseguir!",
+			Title = "Fechar",
+			Text = "Deseja realmente fechar o Dryz Client?",
 			Options = {
-				{"Confirm", function()
+				{"Confirmar", function()
 					ScreenGui:Destroy()
 				end},
-				{"Cancel"}
+				{"Cancelar"}
 			}
 		})
 	end
@@ -1920,6 +1783,7 @@ end
 			SetProps(Button, {
 				Text = Name,
 				Font = Enum.Font.GothamBold,
+	        	BackgroundColor3 = Theme["Color Hub 2"],
 				TextColor3 = Theme["Color Text"],
 				TextSize = 12
 			})
@@ -1967,6 +1831,7 @@ end
 		end
 		
 		local TabSelect = Make("Button", MainScroll, {
+		    BackgroundColor3 = Theme["Color Hub 2"],
 			Size = UDim2.new(1, 0, 0, 24)
 		})Make("Corner", TabSelect)
 		
@@ -2468,6 +2333,7 @@ end
 					
 					local Button = Make("Button", ScrollFrame, {
 						Name = "Option",
+	                	BackgroundColor3 = Theme["Color Hub 2"],
 						Size = UDim2.new(1, 0, 0, 21),
 						Position = UDim2.new(0, 0, 0.5),
 						AnchorPoint = Vector2.new(0, 0.5)
