@@ -950,6 +950,7 @@ end
 			SetProps(Button, {
 				Text = Name,
 				Font = Enum.Font.GothamBold,
+	        	BackgroundColor3 = Theme["Color Hub 2"],
 				TextColor3 = Theme["Color Text"],
 				TextSize = 12
 			})
@@ -1119,7 +1120,7 @@ end
 				Position = UDim2.new(0, 30),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
-				TextSize = 24,
+				TextSize = 21,
 				TextXAlignment = "Left"
 			}), "Text")
 			
@@ -1500,6 +1501,7 @@ end
 					local Button = Make("Button", ScrollFrame, {
 						Name = "Option",
 						Size = UDim2.new(1, 0, 0, 21),
+	                	BackgroundColor3 = Theme["Color Hub 2"],
 						Position = UDim2.new(0, 0, 0.5),
 						AnchorPoint = Vector2.new(0, 0.5)
 					})Make("Corner", Button, UDim.new(0, 4))
