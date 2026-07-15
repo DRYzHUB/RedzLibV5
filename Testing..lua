@@ -464,6 +464,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 
 	local Frame = Make("Button", Instance, {
 		BackgroundColor3 = Theme["Color Theme"],
+		BackgroundTransparency = 0.1,
 		Size = UDim2.new(1, 0, 0, 25),
 		AutomaticSize = "Y",
 		Name = "Option"
@@ -765,12 +766,12 @@ function redzlib:MakeWindow(Configs)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Close",
-			Text = "Deseja realmente fechar o Dryz Client? Ele contém recursos essenciais e fechar agora pode interromper funções importantes, causar falhas ou perder suas configurações. Cuidado antes de prosseguir!",
+			Text = "Deseja realmente fechar o Dryz Client?",
 			Options = {
-				{"Confirm", function()
+				{"Confirmar", function()
 					ScreenGui:Destroy()
 				end},
-				{"Cancel"}
+				{"Cancelar"}
 			}
 		})
 	end
@@ -809,24 +810,6 @@ function redzlib:MakeWindow(Configs)
 		MainFrame.Visible = not MainFrame.Visible
 	end
 	
-	function Window:SetThemeParticles(enabled)
-		if enabled then
-			if not ParticleConnection then
-				ParticleConnection = RunService.Heartbeat:Connect(function()
-					UpdateParticles()
-					SpawnSystem()
-				end)
-			end
-			ParticleContainer.Visible = true
-		else
-			if ParticleConnection then
-				ParticleConnection:Disconnect()
-				ParticleConnection = nil
-			end
-			ParticleContainer.Visible = false
-		end
-	end
-
 
 	function Window:Minimize()
 		MainFrame.Visible = not MainFrame.Visible
@@ -1009,7 +992,7 @@ end
 			Font = Enum.Font.ArialBold, --GothamMedium
 			Text = TName,
 			TextColor3 = Theme["Color Text"],
-			TextSize = 10,
+			TextSize = 7,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTransparency = (FirstTab and 0.3) or 0,
 			TextTruncate = "AtEnd"
@@ -1117,7 +1100,7 @@ end
 				Text = SectionName,
 				TextColor3 = Theme["Color Section"],
 				Size = UDim2.new(1, -25, 1, 0),
-				Position = UDim2.new(0, 30),
+				Position = UDim2.new(0, 35),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
 				TextSize = 21,
