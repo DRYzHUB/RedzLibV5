@@ -464,7 +464,6 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 
 	local Frame = Make("Button", Instance, {
 		BackgroundColor3 = Theme["Color Theme"],
-		BackgroundTransparency = 0.1,
 		Size = UDim2.new(1, 0, 0, 25),
 		AutomaticSize = "Y",
 		Name = "Option"
@@ -611,13 +610,25 @@ function redzlib:MakeWindow(Configs)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0.03,
+		BackgroundTransparency = 1,
 		Name = "Hub"
 	}), "Main")
 	Make("Gradient", MainFrame, {
 		Rotation = 45
 	})MakeDrag(MainFrame)
 	
+    local WindowBackground = Create("ImageLabel", MainFrame, {
+        Name = "WindowBackground",
+        Size = UDim2.new(1, 0, 1, 0),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundTransparency = 1,
+        Image = "rbxassetid://133021256665611", 
+        ImageTransparency = 0.03,
+        ScaleType = Enum.ScaleType.Crop,
+        ZIndex = 0
+    })
+    Make("Corner", WindowBackground)
+
 	local MainCorner = Make("Corner", MainFrame)
 	
 	local Components = Create("Folder", MainFrame, {
@@ -810,7 +821,6 @@ function redzlib:MakeWindow(Configs)
 		MainFrame.Visible = not MainFrame.Visible
 	end
 	
-
 	function Window:Minimize()
 		MainFrame.Visible = not MainFrame.Visible
 	end
@@ -992,7 +1002,7 @@ end
 			Font = Enum.Font.ArialBold, --GothamMedium
 			Text = TName,
 			TextColor3 = Theme["Color Text"],
-			TextSize = 7,
+			TextSize = 10,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTransparency = (FirstTab and 0.3) or 0,
 			TextTruncate = "AtEnd"
@@ -1100,10 +1110,10 @@ end
 				Text = SectionName,
 				TextColor3 = Theme["Color Section"],
 				Size = UDim2.new(1, -25, 1, 0),
-				Position = UDim2.new(0, 35),
+				Position = UDim2.new(0, 33),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
-				TextSize = 21,
+				TextSize = 19,
 				TextXAlignment = "Left"
 			}), "Text")
 			
