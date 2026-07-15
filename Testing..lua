@@ -387,51 +387,11 @@ AddEle("Stroke", function(parent, props, ...)
 	return New
 end)
 
-AddEle("Tab", function(parent, props, ...)
-	local args = {...}
-	local New = InsertTheme(SetProps(Create("TextButton", parent, {
-		Text = "",
-		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = Theme["Color Hub 2"],
-		AutoButtonColor = false
-	}), props), "Frame")
-
-	local OriginalSize = New.Size
-	local IsMouseOver = false -- Variável para rastrear se o mouse está sobre o botão
-
-	New.MouseEnter:Connect(function()
-		IsMouseOver = true
-		New.BackgroundTransparency = 0.4
-	end)
-	
-	New.MouseLeave:Connect(function()
-		IsMouseOver = false
-		New.BackgroundTransparency = 0
-	end)
-
-	New.MouseButton1Down:Connect(function()
-		CreateTween({New, "Size", OriginalSize - UDim2.fromOffset(4, 2), 0.1})
-		CreateTween({New, "BackgroundTransparency", 0.6, 0.1})
-	end)
-
-	New.MouseButton1Up:Connect(function()
-		CreateTween({New, "Size", OriginalSize, 0.15})
-		CreateTween({New, "BackgroundTransparency", IsMouseOver and 0.4 or 0, 0.15})
-	end)
-
-	if args[1] then
-		New.Activated:Connect(args[1])
-	end
-
-	return New
-end)
-
 AddEle("Button", function(parent, props, ...)
 	local args = {...}
 	local New = InsertTheme(SetProps(Create("TextButton", parent, {
 		Text = "",
 		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = Theme["Color Theme"],
 		AutoButtonColor = false
 	}), props), "Frame")
 
@@ -464,7 +424,6 @@ AddEle("Button", function(parent, props, ...)
 
 	return New
 end)
-
 AddEle("Gradient", function(parent, props, ...)
 	local args = {...}
 	local New = InsertTheme(SetProps(Create("UIGradient", parent, {
@@ -504,6 +463,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 	}), "DarkText")
 
 	local Frame = Make("Button", Instance, {
+		BackgroundColor3 = Theme["Color Theme"],
 		Size = UDim2.new(1, 0, 0, 25),
 		AutomaticSize = "Y",
 		Name = "Option"
@@ -1036,7 +996,8 @@ end
 			TIcon = false
 		end
 		
-		local TabSelect = Make("Tab", MainScroll, {
+		local TabSelect = Make("Button", MainScroll, {
+	    	BackgroundColor3 = Theme["Color Hub 2"],
 			Size = UDim2.new(1, 0, 0, 24)
 		})Make("Corner", TabSelect)
 		
