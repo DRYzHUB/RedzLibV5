@@ -613,10 +613,7 @@ function redzlib:MakeWindow(Configs)
 		BackgroundTransparency = 1,
 		Name = "Hub"
 	}), "Main")
-	Make("Gradient", MainFrame, {
-		Rotation = 45
-	})MakeDrag(MainFrame)
-	
+
     local WindowBackground = Create("ImageLabel", MainFrame, {
         Name = "WindowBackground",
         Size = UDim2.new(1, 0, 1, 0),
@@ -628,6 +625,10 @@ function redzlib:MakeWindow(Configs)
         ZIndex = 0
     })
     Make("Corner", WindowBackground)
+
+	Make("Gradient", MainFrame, {
+		Rotation = 45
+	})MakeDrag(MainFrame)
 
 	local MainCorner = Make("Corner", MainFrame)
 	
