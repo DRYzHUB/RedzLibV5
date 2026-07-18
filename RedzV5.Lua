@@ -1442,7 +1442,7 @@ function redzlib:MakeWindow(Configs)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0,
+		BackgroundTransparency = 0.03,
 		Name = "Hub"
 	}), "Main")
 
@@ -1598,7 +1598,7 @@ function redzlib:MakeWindow(Configs)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Fechar",
-			Text = "Deseja realmente fechar o Dryz Client?",
+			Text = "Deseja realmente fechar o Conquer Hub?",
 			Options = {
 				{"Confirmar", function()
 					ScreenGui:Destroy()
@@ -1935,15 +1935,6 @@ end
 				Size = UDim2.new(1, 0, 0, 20),
 				BackgroundTransparency = 1,
 				Name = "Option"
-			})
-
-			local SectionIcon = Create("ImageLabel", SectionFrame, {
-				Size = UDim2.new(0, 13, 0, 13),
-				Position = UDim2.new(0, 0, 0.5, 5),
-				AnchorPoint = Vector2.new(0, 0.5),
-				BackgroundTransparency = 1,
-                ImageColor3 = Theme["Color SubTitle"],
-				Image = "rbxassetid://10709797382"
 			})
 
 			local SectionLabel = InsertTheme(Create("TextLabel", SectionFrame, {
