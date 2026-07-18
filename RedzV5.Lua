@@ -1215,7 +1215,7 @@ AddEle("Stroke", function(parent, props, ...)
 	local args = {...}
 	local New = InsertTheme(SetProps(Create("UIStroke", parent, {
 		Color = args[1] or Theme["Color Stroke"],
-		Thickness = args[2] or 1,
+		Thickness = args[2] or 1.5,
 		ApplyStrokeMode = "Border"
 	}), props), "Stroke")
 	return New
@@ -1301,7 +1301,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 		Size = UDim2.new(1, 0, 0, 25),
 		AutomaticSize = "Y",
 		Name = "Option"
-	})Make("Corner", Frame, UDim.new(0, 6))Make("Stroke", Frame)
+	})Make("Corner", Frame, UDim.new(0, 6))
 	
 	LabelHolder = Create("Frame", Frame, {
 		AutomaticSize = "Y",
@@ -1445,17 +1445,6 @@ function redzlib:MakeWindow(Configs)
 		BackgroundTransparency = 0,
 		Name = "Hub"
 	}), "Main")
-
-    local WindowBackground = Create("ImageLabel", MainFrame, {
-        Name = "WindowBackground",
-        Size = UDim2.new(1, 0, 1, 0),
-        Position = UDim2.new(0, 0, 0, 0),
-        BackgroundTransparency = 1,
-        Image = "rbxassetid://99314903791071", 
-        ImageTransparency = 0.03,
-        ScaleType = Enum.ScaleType.Crop,
-        ZIndex = 0
-    })
 
 	Make("Gradient", MainFrame, {
 		Rotation = 45
@@ -1948,12 +1937,21 @@ end
 				Name = "Option"
 			})
 
+			local SectionIcon = Create("ImageLabel", SectionFrame, {
+				Size = UDim2.new(0, 13, 0, 13),
+				Position = UDim2.new(0, 0, 0.5, 5),
+				AnchorPoint = Vector2.new(0, 0.5),
+				BackgroundTransparency = 1,
+                ImageColor3 = Theme["Color SubTitle"],
+				Image = "rbxassetid://10709797382"
+			})
+
 			local SectionLabel = InsertTheme(Create("TextLabel", SectionFrame, {
 				Font = Enum.Font.FredokaOne,--GothamBold
 				Text = SectionName,
 				TextColor3 = Theme["Color Section"],
 				Size = UDim2.new(1, -25, 1, 0),
-				Position = UDim2.new(0, 13),
+				Position = UDim2.new(0, 15),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
 				TextSize = 18,
