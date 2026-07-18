@@ -1452,7 +1452,7 @@ function redzlib:MakeWindow(Configs)
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundTransparency = 1,
         Image = "rbxassetid://99314903791071", 
-        ImageTransparency = 0.15,
+        ImageTransparency = 0.03,
         ScaleType = Enum.ScaleType.Crop,
         ZIndex = 0
     })
@@ -1954,15 +1954,6 @@ end
 				Name = "Option"
 			})
 
-			local SectionIcon = Create("ImageLabel", SectionFrame, {
-				Size = UDim2.new(0, 13, 0, 13),
-				Position = UDim2.new(0, 0, 0.5, 6),
-				AnchorPoint = Vector2.new(0, 0.5),
-				BackgroundTransparency = 1,
-                ImageColor3 = Theme["Color SubTitle"],
-				Image = "rbxassetid://126463403744337"
-			})
-
 			local SectionLabel = InsertTheme(Create("TextLabel", SectionFrame, {
 				Font = Enum.Font.FredokaOne,--GothamBold
 				Text = SectionName,
@@ -2173,7 +2164,7 @@ end
 			
 			local DropFrame = Create("Frame", NoClickFrame, {
 				Size = UDim2.new(SelectedFrame.Size.X, 0, 0),
-				BackgroundTransparency = 0.1,
+				BackgroundTransparency = 1,
 				BackgroundColor3 = Color3.fromRGB(255, 255, 255),
 				AnchorPoint = Vector2.new(0, 1),
 				Name = "DropdownFrame",
