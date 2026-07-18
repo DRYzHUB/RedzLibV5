@@ -1301,7 +1301,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 		Size = UDim2.new(1, 0, 0, 25),
 		AutomaticSize = "Y",
 		Name = "Option"
-	})Make("Corner", Frame, UDim.new(0, 6))
+	})Make("Corner", Frame, UDim.new(0, 6))Make("Stroke", Frame)
 	
 	LabelHolder = Create("Frame", Frame, {
 		AutomaticSize = "Y",
@@ -1681,18 +1681,13 @@ function Window:AddMinimizeButton(Configs)
 		Position = UDim2.fromScale(0.15, 0.15),
 		BackgroundTransparency = 1,
 		AutoButtonColor = false
-	}))
+	}))Make("Stroke", Button)
 
-	local Stroke, Corner
+	local Corner
 
 	if Configs.Corner then
 		Corner = Make("Corner", Button)
 		SetProps(Corner, Configs.Corner)
-	end
-
-	if Configs.Stroke then
-		Stroke = Make("Stroke", Button)
-		SetProps(Stroke, Configs.Stroke)
 	end
 
 	SetProps(Button, Configs.Button)
@@ -1700,7 +1695,6 @@ function Window:AddMinimizeButton(Configs)
 	Button.Activated:Connect(Window.Minimize)
 
 	return {
-		Stroke = Stroke,
 		Corner = Corner,
 		Button = Button
 	}
