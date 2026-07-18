@@ -1120,13 +1120,6 @@ end
 				BackgroundTransparency = 1,
 				Name = "Option"
 			})
-			
-			local SectionIcon = Create("ImageLabel", SectionFrame, {
-				Size = UDim2.new(0, 13, 0, 13),
-				Position = UDim2.new(0, 6),
-				BackgroundTransparency = 1,
-				Image = "rbxassetid://10709797382"
-			})
 
 			local SectionLabel = InsertTheme(Create("TextLabel", SectionFrame, {
 				Font = Enum.Font.FredokaOne,--GothamBold
